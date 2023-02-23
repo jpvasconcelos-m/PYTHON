@@ -1,0 +1,142 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from keyboard import press
+from pynput.keyboard import Key, Controller
+
+
+keyboard = Controller()
+
+def mudar_iframe_selecionar_opcao(xpath,id,texto_visivel):
+    # Mudar para o iframe corretoeb
+    iframe = web.find_element(By.XPATH, xpath)
+    web.switch_to.frame(iframe)
+
+    wait = WebDriverWait(web, 15)
+
+    # Selecionar opção da lista suspensa
+    select_element = wait.until(EC.element_to_be_clickable((By.ID, id)))
+    select = Select(select_element)
+    select.select_by_visible_text(texto_visivel)
+
+    time.sleep(10)
+
+# Inicialização do webdriver
+web = webdriver.Chrome()
+web.get('https://www.cesu.pe.gov.br/citsmart/pages/login/login.load')
+time.sleep(2)
+
+# Entrar com o usuário e senha
+usuario = "joao.mendes@zerohum.com.br"
+campo_usuario = web.find_element("xpath", '//*[@id="user"]')
+campo_usuario.send_keys(usuario)
+
+senha = "Joaopedro132@"
+campo_senha = web.find_element("xpath", '//*[@id="senha"]')
+campo_senha.send_keys(senha)
+
+entrar = web.find_element("xpath", '//*[@id="formlogin"]/div[2]/div[2]/button')
+entrar.click()
+
+time.sleep(2)
+
+# Clicar em botão de três pontinhos e acessar o sistema
+pontinhos = web.find_element("xpath", '//*[@id="navbar"]/ul/li[4]/a/i')
+pontinhos.click()
+
+acess_sist = web.find_element("xpath", '//*[@id="navbar"]/ul/li[4]/ul/li[4]/a')
+acess_sist.click()
+
+time.sleep(2)
+
+# Clicar em Registro de Incidentes e Serviços
+regist_incidentes = web.find_element("xpath", '/html/body/div[4]/div/div/div/div[2]/div/div[2]/div/div[1]/div/div[2]/adf-widget-content/div/ul/li[3]/a')
+regist_incidentes.click()
+
+time.sleep(2)
+
+# Clicar em Nova Solicitação
+nova_solicitacao = web.find_element("xpath", '//*[@id="titulo"]/div[1]/div[1]/span')
+nova_solicitacao.click()
+
+mudar_iframe_selecionar_opcao("//iframe[@id='frameNovaSolicitacao']","idContrato","SES de 01/05/2018 (Secretaria Estadual de Saúde - Consórcio DPZ)")
+
+
+solicitante="rodolfo de oliveira"
+campo_solicitante=web.find_element(By.ID, 'solicitante')
+campo_solicitante.click()
+campo_solicitante.send_keys(solicitante)
+
+for i in range(2):  # repetir o código 4 vezes
+    keyboard.press(Key.down)
+    time.sleep(1)
+
+
+press('enter')
+
+time.sleep(5)
+press('enter')
+time.sleep(2)
+press('enter')
+time.sleep(5)
+
+'''
+email="qualseusegredokid@email.com"
+campo_email=web.find_element(By.ID, 'emailcontato')
+campo_email.click()
+campo_email.send_keys(email)
+time.sleep(5)
+'''
+
+terceiro_passo=web.find_element(By.ID, 'tab3')
+terceiro_passo.click()
+'''
+servico="SES (HGV) > Impressora e Digitalização"
+campo_servico=web.find_element(By.ID, 'servicoNegocioTecnicoBusca')
+campo_servico.click()
+campo_servico.send_keys(servico)
+'''
+'''
+tipo="inc"
+campo_tipo=web.find_element(By.ID, "idTipoDemandaServico")
+campo_tipo.click()
+campo_tipo.send_keys(tipo)
+press('enter')
+time.sleep(5)
+
+'''
+
+atividade="SES (HGV) > Impressora"
+campo_atividade=web.find_element(By.ID, 'servicoBusca')
+campo_atividade.click()
+campo_atividade.send_keys(atividade)
+campo_atividade.click()
+
+for i in range(4):  # repetir o código 4 vezes
+    keyboard.press(Key.down)
+    time.sleep(1)
+
+press('enter')
+time.sleep(5)
+press('enter')
+time.sleep(2)
+press('enter')
+time.sleep(5)
+
+descricao="Descrição: 1blablablablablablablablablablablablablablablabla blablablablablabla blablablablablablablabla2"
+elemento_descricao = web.find_element(By.XPATH, "//div[@id='fieldDescricao']//div[@class='controls']//div[@class='controls']//iframe[@class='wysihtml5-sandbox']")
+elemento_descricao.click()
+time.sleep(4)
+elemento_descricao.send_keys(descricao)
+
+etiqueta="1021329999999999999999999999999999999999999999999999999999999999999"
+campo_etiqueta= web.find_element(By.XPATH, "//iframe[@id='fraInformacoesComplementares']")
+campo_etiqueta.click()
+time.sleep(3)
+campo_etiqueta.send_keys(etiqueta)
+time.sleep(10)
+
+time.sleep(10)
