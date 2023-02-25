@@ -30,11 +30,11 @@ web.get('https://www.cesu.pe.gov.br/citsmart/pages/login/login.load')
 time.sleep(2)
 
 # Entrar com o usuário e senha
-usuario = "joao.mendes@zerohum.com.br"
+usuario = ""
 campo_usuario = web.find_element("xpath", '//*[@id="user"]')
 campo_usuario.send_keys(usuario)
 
-senha = "Joaopedro132@"
+senha = ""
 campo_senha = web.find_element("xpath", '//*[@id="senha"]')
 campo_senha.send_keys(senha)
 
@@ -140,3 +140,4 @@ campo_etiqueta.send_keys(etiqueta)
 time.sleep(10)
 
 time.sleep(10)
+#teste
